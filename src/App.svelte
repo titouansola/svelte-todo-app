@@ -29,18 +29,12 @@
 		refresh = true;
 		TodoService.fetchTodoList();
 	}
-
-	function updateTodo(todo) {
-		const updatedTodo = {...todo};
-		updatedTodo.done = !updatedTodo.done;
-		
+	function updateTodo(updatedTodo) {
 		TodoService.updateTodo(updatedTodo).then(fetchTodoList);
 	}
-
 	function deleteTodo(todo) {
 		TodoService.deleteTodo(todo).then(fetchTodoList);
 	}
-
 	function createTodoByTitle(title) {
 		const todo = {
 			title,
@@ -52,16 +46,14 @@
 
 
 	// Handlers
-	function toggleTodoHandler(event) {
-		updateTodo(event.detail);
-	}
-
 	function createTodoHandler(event) {
 		createTodoByTitle(event.detail);
 	}
-
 	function deleteTodoHandler(event) {
 		deleteTodo(event.detail);
+	}
+	function editTodoHandler(event) {
+		updateTodo(event.detail);
 	}
 </script>
 
@@ -70,11 +62,17 @@
 	<TodoCreator on:create={createTodoHandler}></TodoCreator>
 
 	<div class="separator"></div>
+
+	<button on:click={fetchTodoList} class="block">
+		refresh
+	</button>
+
 	{#if refresh}
 		<Loader></Loader>
 	{:else}
 		<TodoList
-			on:toggle={toggleTodoHandler}
+			on:edit={editTodoHandler}
+			on:toggle={editTodoHandler}
 			on:delete={deleteTodoHandler}
 			todoList={todoList}
 		></TodoList>

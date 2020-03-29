@@ -1,7 +1,7 @@
 html {
 	--primary-color: #ff8f00;
-	--success-color: #00e676;
-	--danger-color: #ff1744;
+	--success-color: #00c853;
+	--danger-color: #e53935;
 }
 
 html, body {
@@ -43,7 +43,6 @@ button {
 	padding: 10px 15px;
 	color: white;
 	font-variant: small-caps;
-	box-shadow: rgba(0,0,0,.2) 5px 10px 10px -3px;
 }
 
 button, button.primary {
@@ -60,4 +59,8 @@ button.danger {
 
 button:disabled {
 	opacity: .5;
+}
+
+button.block {
+	width: 100%;
 }
